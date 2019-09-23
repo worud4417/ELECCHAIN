@@ -1,19 +1,99 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{Component} from 'react';
+import { Image, Text, View } from 'react-native';
+import { SplashScreen } from 'expo';
+import { Asset } from 'expo-asset';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import {createAppContainer,createSwitchNavigator} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createStackNavigator} from 'react-navigation-stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+import LoginScreen from './src/screens/LoginScreen';
+import JoinScreen from './src/screens/JoinScreen';
+import MainScreen from './src/screens/MainScreen';
+
+import reducers from './src/reducers/Index'
+
+const defaultNavigationOptions={
+  
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const MainStack = createStackNavigator({
+  Main:{
+    screen:MainScreen
+  }
+},{
+  defaultNavigationOptions
+})
+
+const TabNavigator = createBottomTabNavigator({
+  Main:{
+    screen:MainStack
+  }
+},{
+  defaultNavigationOptions
+})
+
+const SwitchNavigator = createSwitchNavigator({
+  Login:{
+    screen:LoginScreen
   },
-});
+  Join:{
+    screen:JoinScreen
+  },
+  Tab:{
+    screen:TabNavigator
+  }
+})
+
+const AppContainer = createAppContainer(SwitchNavigator);
+
+export default class App extends Component {
+
+  constructor(props){
+    super(props)
+    this.state={
+      isReady : false
+    }
+  }
+
+  componentDidMount() {
+    SplashScreen.preventAutoHide();
+  }
+
+  render() {
+    if (!this.state.isReady) {
+      return (
+        <View style={{ flex: 1 }}>
+          <Image
+            source={require('./assets/cat.jpg')}
+            onLoad={this._cacheResourcesAsync}
+          />
+        </View>
+      );
+    }
+
+    return (
+      <Provider store={createStore(reducers)}>
+        <AppContainer></AppContainer>
+      </Provider>
+    );
+  }
+
+  _cacheResourcesAsync =  () => {
+    setTimeout(()=>{
+      SplashScreen.hide();
+      const images = [
+        require('./assets/cat.jpg'),
+        require('./assets/cat.jpg'),
+      ];
+  
+      const cacheImages = images.map(image => {
+        return Asset.fromModule(image).downloadAsync();
+      });
+  
+       Promise.all(cacheImages);
+      this.setState({ isReady: true });
+    },3000)
+  };
+}
