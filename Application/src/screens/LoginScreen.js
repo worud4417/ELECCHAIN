@@ -22,13 +22,13 @@ class LoginScreen extends Component{
             })
     
             if(type === "success"){
-                this.setState({
-                    accessToken:accessToken,
+                let users = {
+                    isLogin:true,
                     name:user.name,
-                    photoUrl:user.photoUrl
-                })
-                console.log(user)
-                console.log(accessToken)
+                    email:user.email
+                };
+
+                this.props.Login(users);
             }
             else{
                 console.log("cancelled");
@@ -40,32 +40,30 @@ class LoginScreen extends Component{
     }
 
     _signIn(){
-        console.log(this.state.id)
+
     }
     _signUp(){
-
+        this.props.navigation.navigate("Join");
     }
 
     render(){
         return(
             <KeyboardAvoidingView style={styles.keyboardavoidingview}>
-                <View style={{marginLeft:"10%"}}>
+                <View style={{marginLeft:"10%",flex:1,justifyContent:"flex-end"}}>
                     <Text>ID</Text>
                     <TextInput style={styles.textinput} onChangeText={(text)=>this.setState({id:text})}></TextInput>
                     <Text>PASSWORD</Text>
                     <TextInput style={styles.textinput} onChangeText={(text)=>this.setState({password:text})}></TextInput>
                 </View>
-                <View style={{alignSelf:"center"}}>
-                    <View style={{flexDirection:"row"}}>
+                <View style={{flex:1,justifyContent:"flex-start"}}>
                     <TouchableOpacity style={styles.touchableopacity} onPress={()=>this._signIn()}>
-                        <Text>SIGN IN</Text>
+                        <Text style={styles.text}>SIGN IN</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.touchableopacity} onPress={()=>this._signUp()}>
-                        <Text>SIGN UP</Text>
+                        <Text style={styles.text}>SIGN UP</Text>
                     </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity style={{margin:"3%",backgroundColor:"#00000020", width:"50%",padding:"3%"}} onPress={()=>this._googleSignIn()}>
-                        <Text>GOOGLE SIGNIN</Text>
+                    <TouchableOpacity style={styles.touchableopacity} onPress={()=>this._googleSignIn()}>
+                        <Text style={styles.text}>GOOGLE SIGNIN</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
@@ -89,22 +87,29 @@ styles = StyleSheet.create({
         marginBottom:"5%"
     },
     touchableopacity:{
-        margin:"3%",
+        marginLeft:"10%",
+        marginTop:"5%",
         backgroundColor: "#00000020",
-        padding:"3%"
+        padding:"3%",
+        width:"80%",
+        borderWidth:2,
+        borderRadius:10
+    },
+    text:{
+        alignSelf:"center"
     }
 })
 
 function mapStateToProps(state){
     return{
-        id:state.id
+        user:state.user
     };
 }
 
 function mapDispatchToProps(dispatch){
     return {
-        Login:(id)=>{
-            dispatch(ActionCreator.Login(id));
+        Login:(user)=>{
+            dispatch(ActionCreator.Login(user));
         },
         Logout:()=>{
             dispatch(ActionCreator.Logout());

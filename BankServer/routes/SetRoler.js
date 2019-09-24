@@ -49,7 +49,7 @@ router.post('/removeRoler',function(req,res,next){
 })
 
 router.post('/updateRoler',function(req,res,next){
-    Producer.findOne({ID:req.body.ID},function(err,obj){
+    Producer.findOne({ID:req.body.FINDID},function(err,obj){
         if(err){
             return res.status(500).send({error:"database failure"});
         }

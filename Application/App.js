@@ -66,8 +66,9 @@ export default class App extends Component {
       return (
         <View style={{ flex: 1 }}>
           <Image
-            source={require('./assets/cat.jpg')}
+            source={require('./assets/background.png')}
             onLoad={this._cacheResourcesAsync}
+            style={{width:"100%",height:"100%"}}
           />
         </View>
       );
@@ -84,8 +85,7 @@ export default class App extends Component {
     setTimeout(()=>{
       SplashScreen.hide();
       const images = [
-        require('./assets/cat.jpg'),
-        require('./assets/cat.jpg'),
+        require('./assets/background.png')
       ];
   
       const cacheImages = images.map(image => {

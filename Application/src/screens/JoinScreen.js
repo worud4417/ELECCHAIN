@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,StyleSheet} from 'react-native';
+import {View,Text,StyleSheet,TextInput} from 'react-native';
 
 class JoinScreen extends Component{
     constructor(props){
@@ -10,6 +10,9 @@ class JoinScreen extends Component{
         return(
             <View>
                 <Text>JoinScreen</Text>
+                <View>
+                    <TextInput></TextInput>
+                </View>
             </View>
         )
     }
