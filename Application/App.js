@@ -27,20 +27,14 @@ const MainStack = createStackNavigator({
 })
 
 const TabNavigator = createBottomTabNavigator({
-  Main:{
-    screen:MainStack
-  }
+  Main:MainStack
 },{
   defaultNavigationOptions
 })
 
 const SwitchNavigator = createSwitchNavigator({
-  Login:{
-    screen:LoginScreen
-  },
-  Join:{
-    screen:JoinScreen
-  },
+  Login:LoginScreen,
+  Join:JoinScreen,
   Tab:{
     screen:TabNavigator
   }

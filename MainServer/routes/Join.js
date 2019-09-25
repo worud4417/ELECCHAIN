@@ -12,7 +12,6 @@ router.post('/setCustomer',function(req,res,next){
             return res.status(500).send({error:"database failure"});
         }
         if(obj != null){
-            console.log("a")
              return res.status(400).send({error:"duplicated id"})
         }
 

@@ -49,7 +49,8 @@ class LoginScreen extends Component{
     render(){
         return(
             <KeyboardAvoidingView style={styles.keyboardavoidingview}>
-                <View style={{marginLeft:"10%",flex:1,justifyContent:"flex-end"}}>
+                <View style={{marginLeft:"10%",flex:1,justifyContent:"flex-end",marginRight:"10%"}}>
+                    <Image source={require("../../assets/logos.png")} style={styles.image}></Image>
                     <Text>ID</Text>
                     <TextInput style={styles.textinput} onChangeText={(text)=>this.setState({id:text})}></TextInput>
                     <Text>PASSWORD</Text>
@@ -71,19 +72,23 @@ class LoginScreen extends Component{
     }
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
     keyboardavoidingview:{
         alignContent:"center",
         justifyContent:"center",
         flex:1
     },
+    image:{
+        width:"25%",height:"20%",alignSelf:"center",marginBottom:"20%"
+    },
     text:{
         fontSize:20,
         fontWeight:"bold",
+        alignSelf:"center"
     }, 
     textinput:{
         borderBottomWidth:1,
-        width:"80%",
+        width:"100%",
         marginBottom:"5%"
     },
     touchableopacity:{
@@ -94,9 +99,6 @@ styles = StyleSheet.create({
         width:"80%",
         borderWidth:2,
         borderRadius:10
-    },
-    text:{
-        alignSelf:"center"
     }
 })
 
