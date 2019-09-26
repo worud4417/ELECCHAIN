@@ -11,25 +11,63 @@ import {createStackNavigator} from 'react-navigation-stack';
 import LoginScreen from './src/screens/LoginScreen';
 import JoinScreen from './src/screens/JoinScreen';
 import MainScreen from './src/screens/MainScreen';
+import MapScreen from './src/screens/MapScreen';
+import ChargeScreen from './src/screens/ChargeScreen';
+import MyScreen from './src/screens/MyScreen';
+import SettingScreen from './src/screens/SettingScreen';
+import LogoutComponent from './src/components/LogoutComponent';
 
 import reducers from './src/reducers/Index'
 
-const defaultNavigationOptions={
-  
-}
+const defaultNavigationOptions={};
+
+const MyStack = createStackNavigator({
+  My:MyScreen
+},{
+  defaultNavigationOptions
+});
+
+const SettingStack = createStackNavigator({
+  Setting:SettingScreen
+},{
+  defaultNavigationOptions
+});
 
 const MainStack = createStackNavigator({
-  Main:{
-    screen:MainScreen
-  }
+  Main:MainScreen,
+  Map:MapScreen,
+  Charge:ChargeScreen
 },{
   defaultNavigationOptions
-})
+});
 
 const TabNavigator = createBottomTabNavigator({
-  Main:MainStack
+  Home:MainStack,
+  My:MyStack,
+  Setting:SettingStack,
+  Logout:LogoutComponent
 },{
-  defaultNavigationOptions
+  defaultNavigationOptions:({navigation})=>({
+    tabBarIcon:({focused,horizontal,tintColor})=>{
+      const {routeName} = navigation.state;
+      if(routeName === "Home"){
+        return <Image source={require("./assets/home.png")} style={{width:25,height:25}}></Image>
+      }
+      else if(routeName === "My"){
+        return <Image source={require("./assets/my.png")} style={{width:25,height:25}}></Image>
+      }
+      else if(routeName === "Setting"){
+        return <Image source={require("./assets/settings.png")} style={{width:25,height:25}}></Image>
+      }
+      else if(routeName === "Logout"){
+        return <Image source={require("./assets/logout.png")} style={{width:25,height:25}}></Image>
+      }
+    },
+  }),
+  tabBarOptions:{
+    activeTintColor:"blue",
+    activeBackgroundColor:"#B8BeFF",
+  },
 })
 
 const SwitchNavigator = createSwitchNavigator({

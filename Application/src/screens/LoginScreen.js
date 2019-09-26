@@ -4,6 +4,8 @@ import {connect}from 'react-redux';
 import ActionCreator from '../actions/Index';
 import * as Google from 'expo-google-app-auth';
 
+import fetchLogin from '../apis/LoginApi';
+
 class LoginScreen extends Component{
     
     constructor(props){
@@ -20,15 +22,16 @@ class LoginScreen extends Component{
                 androidClientId:"876782387423-pg0vjmtt6bsv72udmtqcm5njfef291sk.apps.googleusercontent.com",
                 iosClientId:"876782387423-mp76k7od9oedhvrtc9h0m8s2dc6tmbup.apps.googleusercontent.com"
             })
-    
+            console.log(user);
             if(type === "success"){
                 let users = {
                     isLogin:true,
+                    id:user.id,
                     name:user.name,
                     email:user.email
                 };
-
                 this.props.Login(users);
+                this.props.navigation.navigate("Main");
             }
             else{
                 console.log("cancelled");
@@ -39,8 +42,15 @@ class LoginScreen extends Component{
         }
     }
 
-    _signIn(){
-
+    async _signIn(){
+        let user = await fetchLogin(this.state.id,this.state.password);
+        if(user.error){
+            alert("error");
+        }
+        else{
+            this.props.Login({isLogin:true,id:user.ID,name:user.NAME,email:user.EMAIL});
+            this.props.navigation.navigate("Home");
+        }
     }
     _signUp(){
         this.props.navigation.navigate("Join");
@@ -58,13 +68,13 @@ class LoginScreen extends Component{
                 </View>
                 <View style={{flex:1,justifyContent:"flex-start"}}>
                     <TouchableOpacity style={styles.touchableopacity} onPress={()=>this._signIn()}>
-                        <Text style={styles.text}>SIGN IN</Text>
+                        <Text style={styles.text}>로그인</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.touchableopacity} onPress={()=>this._signUp()}>
-                        <Text style={styles.text}>SIGN UP</Text>
+                        <Text style={styles.text}>회원가입</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.touchableopacity} onPress={()=>this._googleSignIn()}>
-                        <Text style={styles.text}>GOOGLE SIGNIN</Text>
+                        <Text style={styles.text}>GOOGLE 로그인</Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
@@ -112,9 +122,6 @@ function mapDispatchToProps(dispatch){
     return {
         Login:(user)=>{
             dispatch(ActionCreator.Login(user));
-        },
-        Logout:()=>{
-            dispatch(ActionCreator.Logout());
         }
     }
 }
