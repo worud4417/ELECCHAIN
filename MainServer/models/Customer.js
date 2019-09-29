@@ -24,6 +24,10 @@ var customerSchema = new Schema({
         type:String,
         required:true
     },
+    COIN:{
+        type:Number,
+        default:0
+    },
     JOINDATE:{
         type:Date,
         default:new Date()

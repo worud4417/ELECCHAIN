@@ -9,6 +9,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var joinRouter = require('./routes/Join');
 var loginRouter = require('./routes/Login');
+var joinProducer = require('./routes/JoinProducer');
+var balanceCharge = require('./routes/BalanceCharge');
+var joinAgency = require('./routes/JoinAgency');
 
 var app = express();
 
@@ -34,6 +37,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/join',joinRouter);
 app.use('/api/login',loginRouter);
+app.use('/api/joinProducer',joinProducer);
+app.use('/api/balanceCharge',balanceCharge);
+app.use('/api/joinAgency',joinAgency);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

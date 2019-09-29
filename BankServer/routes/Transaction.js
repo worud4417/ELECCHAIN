@@ -5,11 +5,11 @@ var Producer = require('../models/Producer');
 
 router.post('/',function(req,res,next){
 
-    REMITTERID = req.body.REMITTERID;
-    RECIPIENTID = req.body.RECIPIENTID;
+    REMITTERACCOUNT = req.body.REMITTERACCOUNT;
+    RECIPIENTACCOUNT = req.body.RECIPIENTACCOUNT;
     AMOUNT = req.body.AMOUNT;
 
-    Producer.findOne({ID:REMITTERID},function(err,obj){
+    Producer.findOne({ACCOUNT:REMITTERACCOUNT},function(err,obj){
         if(err){
             return res.status(500).send("database failure");
         }
@@ -27,7 +27,7 @@ router.post('/',function(req,res,next){
             }
         })
 
-        Producer.findOne({ID:RECIPIENTID},function(err,obj){
+        Producer.findOne({ACCOUNT:RECIPIENTACCOUNT},function(err,obj){
             if(err){
                 return res.status(500).send("database failure");
             }
@@ -39,7 +39,7 @@ router.post('/',function(req,res,next){
                 if(err){
                     return res.status(500).json({error:'failed to update'});
                 }
-                return res.json({message:'transaction success'});
+                return res.status(200).json({message:'transaction success'});
             })
         })
     })

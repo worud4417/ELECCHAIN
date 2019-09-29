@@ -1,13 +1,13 @@
 var express = require("express");
 var router = express.Router();
 
-var Customer = require('../models/Customer');
+var Agency = require('../models/Agency');
 
-router.post('/setCustomer',function(req,res,next){
+router.post('/setAgency',function(req,res,next){
 
-    var customer = new Customer();
+    var agency = new Agency();
 
-    Customer.findOne({ID:req.body.ID},function(err,obj){
+    Agency.findOne({ID:req.body.ID},function(err,obj){
         if(err){
             return res.status(500).send({error:"database failure"});
         }
@@ -16,36 +16,20 @@ router.post('/setCustomer',function(req,res,next){
         }
 
         if(req.body.ID){
-            customer.ID = req.body.ID;
+            agency.ID = req.body.ID;
         }
         else{
             return res.status(400).send({error:"id empty"});
         }
 
         if(req.body.PASSWORD){
-            customer.PASSWORD = req.body.PASSWORD;
+            agency.PASSWORD = req.body.PASSWORD;
         }
         else{
             return res.status(400).send({error:"password empty"});
         }
     
-        if(req.body.NAME){
-            customer.NAME = req.body.NAME;
-        }
-        else{
-            return res.status(400).send({error:"name empty"});
-        }
-    
-        customer.CARNUMBER = req.body.CARNUMBER;
-    
-        if(req.body.EMAIL){
-            customer.EMAIL = req.body.EMAIL;
-        }
-        else{
-            return res.status(400).send({error:"email empty"});
-        }
-    
-        customer.save(function(err){
+        agency.save(function(err){
             if(err){
                 return res.status(500).send({error:"database failure"});
             }
@@ -54,26 +38,26 @@ router.post('/setCustomer',function(req,res,next){
     })
 })
 
-router.get('/customer',function(req,res,next){
-    Customer.find(function(err,customer){
+router.get('/agency',function(req,res,next){
+    Agency.find(function(err,agency){
         if(err){
             return res.status(500).send({error:"database failure"});
         }
-        return res.json(customer);
+        return res.json(agency);
     })
 })
 
-router.post('/removeCustomer',function(req,res,next){
-    Customer.findOne({ID:req.body.ID},function(err,customer){
+router.post('/removeAgency',function(req,res,next){
+    Agency.findOne({ID:req.body.ID},function(err,agency){
         if(err){
             return res.status(500).send({error:"database failure"});
         }
 
-        if(customer == null){
-            return res.status(400).send({error:"customer not founded"});
+        if(agency == null){
+            return res.status(400).send({error:"agency not founded"});
         }
         
-        Customer.remove({ID:req.body.ID},function(err,customer){
+        Agency.remove({ID:req.body.ID},function(err,agency){
             if(err){
                 return res.status(500).send({error:"database failure"});
             }
