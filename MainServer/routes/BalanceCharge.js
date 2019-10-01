@@ -11,7 +11,7 @@ router.post('/charge',async function(req,res,next){
     var AMOUNT = req.body.AMOUNT
     var agencyAccount = null;
     
-    Agency.findOne({ID:"DEAGU"},function(err,obj){
+    Agency.findOne({ID:"DEAGU"}, async function(err,obj){
         if(err){
             return res.status(500).json({message:"database failure"});
         }

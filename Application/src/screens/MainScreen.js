@@ -1,5 +1,9 @@
 import React,{Component} from 'react';
 import {View,Text,StyleSheet,TouchableOpacity,Image} from 'react-native';
+import {connect} from "react-redux";
+
+import MainIndicatorComponent from '../components/MainIndicatorComponent';
+import fetchGetChargeBalance from '../apis/GetChargeBalance';
 
 class MainScreen extends Component{
     constructor(props){
@@ -13,11 +17,15 @@ class MainScreen extends Component{
         }
     }
 
+    async componentDidMount(){
+        await fetchGetChargeBalance(this.props.user.id);
+    }
+
     render(){
         return(
             <View style={{flex:1}}>
                 <View style={{flex:1,flexDirection:"row"}}>
-
+                    <MainIndicatorComponent></MainIndicatorComponent>
                 </View>
                 <View style={{flex:1,flexDirection:"row"}}>
                     <TouchableOpacity style={styles.touchableopacity} onPress={()=>this.props.navigation.navigate("Map")}>
@@ -53,4 +61,10 @@ const styles = StyleSheet.create({
     },
 })
 
-export default MainScreen;
+function mapStateToProps(state){
+    return{
+        user:state.user
+    };
+}
+
+export default connect(mapStateToProps)(MainScreen);

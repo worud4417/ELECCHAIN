@@ -22,7 +22,6 @@ class LoginScreen extends Component{
                 androidClientId:"876782387423-pg0vjmtt6bsv72udmtqcm5njfef291sk.apps.googleusercontent.com",
                 iosClientId:"876782387423-mp76k7od9oedhvrtc9h0m8s2dc6tmbup.apps.googleusercontent.com"
             })
-            console.log(user);
             if(type === "success"){
                 let users = {
                     isLogin:true,
@@ -44,7 +43,9 @@ class LoginScreen extends Component{
 
     async _signIn(){
         let user = await fetchLogin(this.state.id,this.state.password);
-        if(user.error){
+
+        if(user == false){}
+        else if(user.error){
             alert("error");
         }
         else{
@@ -52,6 +53,7 @@ class LoginScreen extends Component{
             this.props.navigation.navigate("Home");
         }
     }
+
     _signUp(){
         this.props.navigation.navigate("Join");
     }

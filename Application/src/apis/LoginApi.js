@@ -1,5 +1,7 @@
+var url = require("./IpAddress");
+
 async function fetchLogin(id,password){
-    const uri = "http://172.30.1.40:3001/api/login/login";
+    const uri = url+"/api/login/login";
     
     return fetch(uri,{
         method:"POST",
@@ -18,6 +20,7 @@ async function fetchLogin(id,password){
         if(error.message == "Network request failed"){
             alert("네트워크 오류");
         }
+        return false;
     })
 }
 
