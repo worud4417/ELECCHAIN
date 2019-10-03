@@ -36,7 +36,9 @@ const SettingStack = createStackNavigator({
 const MainStack = createStackNavigator({
   Main:MainScreen,
   Map:MapScreen,
-  Charge:ChargeScreen
+  Charge:{
+    screen:ChargeScreen,
+  }
 },{
   defaultNavigationOptions
 });
@@ -69,6 +71,16 @@ const TabNavigator = createBottomTabNavigator({
     activeBackgroundColor:"#B8BeFF",
   },
 })
+
+MainStack.navigationOptions=({navigation})=>{
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible,
+  };
+};
 
 const SwitchNavigator = createSwitchNavigator({
   Login:LoginScreen,

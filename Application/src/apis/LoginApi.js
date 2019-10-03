@@ -1,7 +1,7 @@
-var url = require("./IpAddress");
+const url = require("./IpAddress");
 
 async function fetchLogin(id,password){
-    const uri = url+"/api/login/login";
+    const uri = url.url+"/api/login/login";
     
     return fetch(uri,{
         method:"POST",

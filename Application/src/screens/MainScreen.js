@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {View,Text,StyleSheet,TouchableOpacity,Image} from 'react-native';
 import {connect} from "react-redux";
+import ActionCreator from '../actions/Index';
 
 import MainIndicatorComponent from '../components/MainIndicatorComponent';
 import fetchGetChargeBalance from '../apis/GetChargeBalance';
@@ -18,7 +19,17 @@ class MainScreen extends Component{
     }
 
     async componentDidMount(){
-        await fetchGetChargeBalance(this.props.user.id);
+        let result = await fetchGetChargeBalance(this.props.user.id);
+        
+        if(result.error){
+            alert(result.error);
+        }
+
+        this.props.SetCharge({
+            id:result.ID,
+            name:result.NAME,
+            balance:result.BALANCE
+        })
     }
 
     render(){
@@ -63,8 +74,17 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
     return{
-        user:state.user
+        user:state.user,
+        charge:state.charge
     };
 }
 
-export default connect(mapStateToProps)(MainScreen);
+function mapDispatchToProps(dispatch){
+    return{
+        SetCharge:(charge)=>{
+            dispatch(ActionCreator.SetCharge(charge));
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MainScreen);

@@ -1,8 +1,7 @@
-
 const protocol = "http";
-const ipAddress = "192.168.123.198";
+const ipAddress = "172.30.1.59";
 const portNumber = "3001"
 
 const url = protocol+"://"+ipAddress+":"+portNumber;
 
-export default url;
+exports.url = url;

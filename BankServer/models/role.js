@@ -1,9 +1,8 @@
 var mongoose = require("mongoose");
-var rollback = require("mongoose-rollback");
 
 var Schema = mongoose.Schema;
 
-var producerSchema = new Schema({
+var roleSchema = new Schema({
     ID:{
         type:String,
         required:true
@@ -19,4 +18,4 @@ var producerSchema = new Schema({
 
 });
 
-module.exports = mongoose.model("producer",producerSchema);
+module.exports = mongoose.model("role",roleSchema);

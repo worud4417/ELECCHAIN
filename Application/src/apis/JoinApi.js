@@ -1,7 +1,7 @@
-var url = require("./IpAddress");
+const url = require("./IpAddress");
 
 async function fetchJoin(id,password,name,carnumber,email){
-    const uri = url+"/api/join/setCusomer";
+    const uri = url.url+"/api/join/setCustomer";
 
     return fetch(uri,{
         method:"POST",
@@ -23,6 +23,7 @@ async function fetchJoin(id,password,name,carnumber,email){
         if(error.message == "Network request failed"){
             alert("네트워크 오류");
         }
+        return {error:false};
     })
 }
 

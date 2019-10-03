@@ -27,6 +27,7 @@ class JoinScreen extends Component{
         
         if(result.error){
             alert("양식을 채워주세요");
+            return null;
         }
         this.props.navigation.navigate("Login");
     }

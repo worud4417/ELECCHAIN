@@ -1,14 +1,22 @@
+/**
+ * bank example server
+ * use REST api
+ * use mongodb, MUST install mongodb 
+ * @project ELECCHAIN
+ * @author JaeGyeong Lee
+*/
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// connect module for mongodb
 var mongoose = require('mongoose')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var setRolerRouter = require('./routes/SetRoler');
+// create and save the rolor account
+var setRoleRouter = require('./routes/SetRole');
+// transaction between roles
 var transactionRouter = require('./routes/Transaction');
 
 var app = express();
@@ -31,10 +39,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/api/roler',setRolerRouter);
-app.use('/api/transaction',transactionRouter);
+// set router
+app.use('/role',setRoleRouter);
+app.use('/transaction',transactionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -12,6 +12,7 @@ var loginRouter = require('./routes/Login');
 var joinProducer = require('./routes/JoinProducer');
 var balanceCharge = require('./routes/BalanceCharge');
 var joinAgency = require('./routes/JoinAgency');
+var getBalance = require('./routes/GetBalance');
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use('/api/login',loginRouter);
 app.use('/api/joinProducer',joinProducer);
 app.use('/api/balanceCharge',balanceCharge);
 app.use('/api/joinAgency',joinAgency);
+app.use('/api/getBalance',getBalance);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
