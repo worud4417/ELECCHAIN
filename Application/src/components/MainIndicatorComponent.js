@@ -14,7 +14,7 @@ class MainIndicatorComponent extends Component{
                     <Text style={styles.header}>ELEC CHAIN</Text>
                 </View>
                 <View style={styles.balanceView}>
-                    <Text style={styles.name}>{this.props.charge.name}님 반갑습니다!</Text>
+                    <Text style={styles.name}>{this.props.user.name}님 반갑습니다!</Text>
                     <Text style={styles.text}>잔액 : {this.props.charge.balance} 원</Text>
                 </View>
             </View>
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state){
     return{
+        user:state.user,
         charge:state.charge
     };
 }

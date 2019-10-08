@@ -5,14 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var joinRouter = require('./routes/Join');
+var joinCustomerRouter = require('./routes/JoinCustomer');
 var loginRouter = require('./routes/Login');
-var joinProducer = require('./routes/JoinProducer');
-var balanceCharge = require('./routes/BalanceCharge');
-var joinAgency = require('./routes/JoinAgency');
-var getBalance = require('./routes/GetBalance');
+var joinProducerRouter = require('./routes/JoinProducer');
+var balanceChargeRouter = require('./routes/BalanceCharge');
+var joinAgencyRouter = require('./routes/JoinAgency');
+var getBalanceRouter = require('./routes/GetBalance');
 
 var app = express();
 
@@ -34,14 +32,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/api/join',joinRouter);
-app.use('/api/login',loginRouter);
-app.use('/api/joinProducer',joinProducer);
-app.use('/api/balanceCharge',balanceCharge);
-app.use('/api/joinAgency',joinAgency);
-app.use('/api/getBalance',getBalance);
+app.use('/customer',joinCustomerRouter);
+app.use('/login',loginRouter);
+app.use('/producer',joinProducerRouter);
+app.use('/balanceCharge',balanceChargeRouter);
+app.use('/agency',joinAgencyRouter);
+app.use('/balance',getBalanceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

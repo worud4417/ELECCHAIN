@@ -1,3 +1,13 @@
+/**
+ * main example server 
+ * @project ELECCHAIN
+ * @author JaeGyeong Lee
+ * get customer's charge balance
+ * use REST api
+ * fort number is 3001
+ * http://(ipaddress):3001/balance/~
+ */
+
 var express = require("express");
 var router = express.Router();
 

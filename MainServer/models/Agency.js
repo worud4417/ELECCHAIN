@@ -1,3 +1,12 @@
+/**
+ * main example server 
+ * @project ELECCHAIN
+ * @author JaeGyeong Lee
+ * agency schema source
+ * use mongodb
+ * use mongoose
+ */
+
 var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
@@ -14,10 +23,6 @@ var agencySchema = new Schema({
     JOINDATE:{
         type:Date,
         default:new Date()
-    },
-    ACCOUNT:{
-        type:String,
-        required:true
     }
 });
 

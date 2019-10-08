@@ -21,24 +21,11 @@ class ChargeScreen extends Component{
         }
     }
 
-    _changeNumber=(MM)=>{
-        let number = this.state.M+1;
-        if(number>9){
-            number=0;
-            let a="M";
-            this.setState((state));
-        }
-        else{
-
-        }
-    }
-
     render(){
         return(
             <View style={{flex:1}}>
                 <View style={{flexDirection:"row",margin:"5%",flex:1}}>
-                    <Text style={styles.textInBalance}>현재 잔액 : </Text>
-                    <Text style={styles.textInBalance}>{this.props.charge.balance}</Text>
+                    <Text style={styles.textInBalance}>현재 잔액 : {this.props.charge.balance}</Text>
                 </View>
                 <View style={{flexDirection:"row",flex:4,margin:"3%"}}>
                     <View style={{flexDirection:"column",flex:1}}>
@@ -130,9 +117,10 @@ class ChargeScreen extends Component{
                     </View>
                 </View>
                 <View style={{flex:3}}>
-                    <Text>{this.state.M*100000+this.state.T*10000+this.state.H*1000}</Text>
-                    <TouchableOpacity>
-                        <Text>충전</Text>
+                    <Text style={{alignSelf:"center",fontSize:30}}>{this.state.M*100000+this.state.T*10000+this.state.H*1000}원</Text>
+                    <TouchableOpacity style={{alignSelf:"center",backgroundColor:"gray",width:100,height:40,margin:"5%",borderRadius:10}}
+                    onPress={()=>this.props.navigation.navigate("NextCharge",{value:this.state.M*100000+this.state.T*10000+this.state.H*1000})}>
+                        <Text style={{alignSelf:"center",fontSize:30}}>충전</Text>
                     </TouchableOpacity>
                 </View>
             </View>

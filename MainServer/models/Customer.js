@@ -1,3 +1,12 @@
+/**
+ * main example server 
+ * @project ELECCHAIN
+ * @author JaeGyeong Lee
+ * customer schema source
+ * use mongodb
+ * use mongoose
+ */
+
 var mongoose = require("mongoose");
 
 var Schema = mongoose.Schema;
@@ -24,7 +33,7 @@ var customerSchema = new Schema({
         type:String,
         required:true
     },
-    COIN:{
+    CHARGE:{
         type:Number,
         default:0
     },

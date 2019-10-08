@@ -1,9 +1,27 @@
+/**
+ * main example server 
+ * @project ELECCHAIN
+ * @author JaeGyeong Lee
+ * login source
+ * use REST api
+ * fort number is 3001
+ * http://(ipaddress):3001/login/~
+ */
+
 var express = require("express");
 var router = express.Router();
 
+//get customer's schema
 var Custmoer = require('../models/Customer');
 
-router.post('/login',function(req,res,next){
+/**
+ * login customer
+ * use POST
+ * use JSON
+ * @param ID is customer's id
+ * @param PASSWORD is customer's password
+ */
+router.post('/',function(req,res,next){
     Custmoer.findOne({ID:req.body.ID},function(err,obj){
         if(err){
             return res.status(500).send({error:"database failure"});

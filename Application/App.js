@@ -16,6 +16,7 @@ import ChargeScreen from './src/screens/ChargeScreen';
 import MyScreen from './src/screens/MyScreen';
 import SettingScreen from './src/screens/SettingScreen';
 import LogoutComponent from './src/components/LogoutComponent';
+import NextChargeScreen from './src/screens/NextChargeScreen';
 
 import reducers from './src/reducers/Index'
 
@@ -35,9 +36,11 @@ const SettingStack = createStackNavigator({
 
 const MainStack = createStackNavigator({
   Main:MainScreen,
-  Map:MapScreen,
   Charge:{
     screen:ChargeScreen,
+  },
+  NextCharge:{
+    screen:NextChargeScreen
   }
 },{
   defaultNavigationOptions

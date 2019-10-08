@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import ActionCreator from '../actions/Index';
 
 import MainIndicatorComponent from '../components/MainIndicatorComponent';
-import fetchGetChargeBalance from '../apis/GetChargeBalance';
+import fetchGetChargeBalance from '../apis/GetChargeBalanceAPI';
 
 class MainScreen extends Component{
     constructor(props){

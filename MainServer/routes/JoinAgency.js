@@ -1,9 +1,26 @@
+/**
+ * main example server 
+ * @project ELECCHAIN
+ * @author JaeGyeong Lee
+ * setting agency source
+ * use REST api
+ * fort number is 3001
+ * http://(ipaddress):3001/agency/~
+ */
 var express = require("express");
 var router = express.Router();
 
+//get agency's schema
 var Agency = require('../models/Agency');
 
-router.post('/setAgency',function(req,res,next){
+/**
+ * set agency
+ * use POST
+ * use JSON
+ * @param ID is agency's id
+ * @param PASSWORD is agency's password
+ */
+router.post('/',function(req,res,next){
 
     var agency = new Agency();
 
@@ -38,7 +55,13 @@ router.post('/setAgency',function(req,res,next){
     })
 })
 
-router.get('/agency',function(req,res,next){
+/**
+ * get all agency
+ * use GET
+ * return JSON
+ * no param
+ */
+router.get('/',function(req,res,next){
     Agency.find(function(err,agency){
         if(err){
             return res.status(500).send({error:"database failure"});
@@ -47,7 +70,13 @@ router.get('/agency',function(req,res,next){
     })
 })
 
-router.post('/removeAgency',function(req,res,next){
+/**
+ * delete agency
+ * use DELETE
+ * use JSON
+ * @param ID is agency's id
+ */
+router.delete('/',function(req,res,next){
     Agency.findOne({ID:req.body.ID},function(err,agency){
         if(err){
             return res.status(500).send({error:"database failure"});
