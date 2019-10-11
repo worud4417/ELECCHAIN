@@ -13,7 +13,7 @@ var router = express.Router();
 
 var Customer = require('../models/Customer');
 
-router.post('/getBalance',function(req,res,next){
+router.post('/',function(req,res,next){
     
     Customer.findOne({ID:req.body.ID},function(err,obj){
         if(err){
@@ -27,7 +27,7 @@ router.post('/getBalance',function(req,res,next){
        var customer = {
            ID:obj.ID,
            NAME:obj.NAME,
-           BALANCE:obj.COIN
+           BALANCE:obj.CHARGE
        }
 
        return res.status(200).json(customer);

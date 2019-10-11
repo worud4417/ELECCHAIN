@@ -8,9 +8,9 @@ var mongoose = require('mongoose');
 var joinCustomerRouter = require('./routes/JoinCustomer');
 var loginRouter = require('./routes/Login');
 var joinProducerRouter = require('./routes/JoinProducer');
-var balanceChargeRouter = require('./routes/BalanceCharge');
+var chargeRouter = require('./routes/Charge');
 var joinAgencyRouter = require('./routes/JoinAgency');
-var getBalanceRouter = require('./routes/GetBalance');
+var balanceRouter = require('./routes/Balance');
 
 var app = express();
 
@@ -35,9 +35,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/customer',joinCustomerRouter);
 app.use('/login',loginRouter);
 app.use('/producer',joinProducerRouter);
-app.use('/balanceCharge',balanceChargeRouter);
+app.use('/charge',chargeRouter);
 app.use('/agency',joinAgencyRouter);
-app.use('/balance',getBalanceRouter);
+app.use('/balance',balanceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

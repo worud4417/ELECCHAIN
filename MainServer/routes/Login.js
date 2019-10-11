@@ -34,7 +34,6 @@ router.post('/',function(req,res,next){
         if(obj.PASSWORD != req.body.PASSWORD){
             return res.status(400).send({error:"password wrong"});
         }
-        console.log(obj)
         return res.status(200).json({result:true,EMAIL:obj.EMAIL,ID:obj.ID,NAME:obj.NAME});
     })
 })

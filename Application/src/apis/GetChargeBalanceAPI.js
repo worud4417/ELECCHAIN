@@ -1,7 +1,7 @@
 const url = require("./IpAddress");
 
 async function fetchGetChargeBalance(id){
-    const uri = url.url+"/api/getBalance/getBalance";
+    const uri = url.url+"/balance";
 
     return fetch(uri,{
         method:"POST",

@@ -1,7 +1,8 @@
 const url = require("./IpAddress");
 
 async function fetchJoin(id,password,name,carnumber,email){
-    const uri = url.url+"/api/join/setCustomer";
+    const uri = url.url+"/customer";
+    console.log(uri);
 
     return fetch(uri,{
         method:"POST",
